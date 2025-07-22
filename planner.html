@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Plan your perfect Bangladesh trip with BackpackrGo's intelligent trip planner.">
+  <meta name="keywords" content="Bangladesh trip planner, travel itinerary, backpacking planner">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <title>Trip Planner - BackpackrGo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Loading Spinner -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="spinner">
+      <div class="spinner-ring"></div>
+      <div class="spinner-text">🎒 BackpackrGo</div>
+    </div>
+  </div>
+
+  <header role="banner">
+    <div class="header-container">
+      <div class="logo-section">
+        <h1>🎒 BackpackrGo</h1>
+        <span class="tagline">Trip Planner</span>
+      </div>
+      
+      <!-- Mobile menu toggle -->
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
+      <nav role="navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#destinations">Destinations</a></li>
+          <li><a href="index.html#how-to-go">How to Go</a></li>
+          <li><a href="index.html#food">What to Eat</a></li>
+          <li><a href="index.html#gallery">Gallery</a></li>
+          <li><a href="planner.html" class="active nav-cta">Trip Planner</a></li>
+        </ul>
+      </nav>
+      
+      <div class="header-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Switch theme">
+          <span class="sun-icon" aria-hidden="true">☀️</span>
+          <span class="moon-icon" aria-hidden="true">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section id="planner-hero">
+    <div class="page-hero">
+      <h1>🗺️ Trip Planner</h1>
+      <p>Plan your perfect Bangladesh adventure with our intelligent itinerary generator</p>
+    </div>
+  </section>
+
+  <section id="trip-planner">
+    <div class="planner-container">
+      <div class="planner-form-section">
+        <div class="form-header">
+          <h2>🗺️ Create Your Perfect Itinerary</h2>
+          <p>Tell us your preferences and we'll craft a personalized journey for you</p>
+        </div>
+        
+        <div class="itinerary-input-box">
+          <div class="input-box-header">
+            <h3>📝 Trip Details</h3>
+            <span class="step-indicator">Step 1 of 1</span>
+          </div>
+          
+          <form id="trip-form">
+            <div class="input-row">
+              <div class="form-group destination-group">
+                <label for="location">
+                  <span class="label-icon">📍</span>
+                  Select Destination
+                </label>
+                <select id="location" required>
+                  <option value="">Choose your destination...</option>
+                  <option value="Sundarbans">🐅 Sundarbans - Mangrove Forest</option>
+                  <option value="Cox's Bazar">🏖️ Cox's Bazar - World's Longest Beach</option>
+                  <option value="Sylhet">🍃 Sylhet - Tea Gardens</option>
+                  <option value="Dhaka">🏛️ Dhaka - Historic Capital</option>
+                  <option value="Chittagong">⚓ Chittagong - Port City</option>
+                  <option value="Rangamati">🏔️ Rangamati - Hill Tracks</option>
+                  <option value="Srimangal">🌿 Srimangal - Tea Capital</option>
+                </select>
+              </div>
+
+              <div class="form-group days-group">
+                <label for="days">
+                  <span class="label-icon">📅</span>
+                  Duration
+                </label>
+                <input type="number" id="days" min="1" max="30" placeholder="e.g., 3" required>
+                <span class="input-suffix">days</span>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="form-group budget-group">
+                <label for="budget">
+                  <span class="label-icon">💰</span>
+                  Budget Range (BDT)
+                </label>
+                <select id="budget">
+                  <option value="budget">💵 Budget (1,000-3,000 per day)</option>
+                  <option value="mid-range">💳 Mid-range (3,000-8,000 per day)</option>
+                  <option value="luxury">💎 Luxury (8,000+ per day)</option>
+                </select>
+              </div>
+
+              <div class="form-group travel-style-group">
+                <label for="travel-style">
+                  <span class="label-icon">🎒</span>
+                  Travel Style
+                </label>
+                <select id="travel-style">
+                  <option value="solo">🚶 Solo Adventure</option>
+                  <option value="couple">💑 Romantic Getaway</option>
+                  <option value="family">👨‍👩‍👧‍👦 Family Trip</option>
+                  <option value="friends">👥 Friends Group</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group interests-group">
+              <label class="interests-label">
+                <span class="label-icon">🎯</span>
+                Your Interests
+                <span class="optional-tag">Optional</span>
+              </label>
+              <div class="interests-grid">
+                <label class="interest-card">
+                  <input type="checkbox" value="nature">
+                  <div class="card-content">
+                    <span class="card-icon">🌿</span>
+                    <span class="card-text">Nature & Wildlife</span>
+                  </div>
+                </label>
+                
+                <label class="interest-card">
+                  <input type="checkbox" value="culture">
+                  <div class="card-content">
+                    <span class="card-icon">🏛️</span>
+                    <span class="card-text">Culture & History</span>
+                  </div>
+                </label>
+                
+                <label class="interest-card">
+                  <input type="checkbox" value="food">
+                  <div class="card-content">
+                    <span class="card-icon">🍜</span>
+                    <span class="card-text">Local Food</span>
+                  </div>
+                </label>
+                
+                <label class="interest-card">
+                  <input type="checkbox" value="adventure">
+                  <div class="card-content">
+                    <span class="card-icon">🚀</span>
+                    <span class="card-text">Adventure Sports</span>
+                  </div>
+                </label>
+                
+                <label class="interest-card">
+                  <input type="checkbox" value="photography">
+                  <div class="card-content">
+                    <span class="card-icon">📸</span>
+                    <span class="card-text">Photography</span>
+                  </div>
+                </label>
+                
+                <label class="interest-card">
+                  <input type="checkbox" value="relaxation">
+                  <div class="card-content">
+                    <span class="card-icon">🧘</span>
+                    <span class="card-text">Relaxation</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-secondary reset-btn">
+                🔄 Reset Form
+              </button>
+              <button type="submit" class="btn-primary generate-btn">
+                ✨ Generate My Itinerary
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="planner-result-section">
+        <div id="itinerary">
+          <div class="welcome-message">
+            <h3>👋 Welcome to Trip Planner!</h3>
+            <p>Fill out the form to generate a personalized itinerary for your Bangladesh adventure.</p>
+            <div class="features-preview">
+              <div class="feature-item">✅ Day-by-day activities</div>
+              <div class="feature-item">✅ Local food recommendations</div>
+              <div class="feature-item">✅ Transportation details</div>
+              <div class="feature-item">✅ Budget breakdown</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="popular-itineraries">
+    <h2>Popular Itineraries</h2>
+    <div class="itinerary-cards">
+      <div class="itinerary-card">
+        <h3>🏖️ Cox's Bazar Weekend</h3>
+        <p><strong>Duration:</strong> 2-3 days</p>
+        <p><strong>Highlights:</strong> Beach, sunset, seafood</p>
+        <button class="btn-secondary" onclick="loadPresetItinerary('coxsbazar-weekend')">Use This Plan</button>
+      </div>
+      <div class="itinerary-card">
+        <h3>🐅 Sundarbans Adventure</h3>
+        <p><strong>Duration:</strong> 3-4 days</p>
+        <p><strong>Highlights:</strong> Mangrove, wildlife, boat safari</p>
+        <button class="btn-secondary" onclick="loadPresetItinerary('sundarbans-adventure')">Use This Plan</button>
+      </div>
+      <div class="itinerary-card">
+        <h3>🍃 Sylhet Tea Tour</h3>
+        <p><strong>Duration:</strong> 4-5 days</p>
+        <p><strong>Highlights:</strong> Tea gardens, hills, nature</p>
+        <button class="btn-secondary" onclick="loadPresetItinerary('sylhet-tea')">Use This Plan</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 BackpackrGo. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BackpackrGo Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-card h3 {
+            color: #00695c;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e8f4f8;
+            padding-bottom: 10px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .error {
+            color: #e74c3c;
+            background: #fee;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .btn {
+            background: #00695c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #004d40;
+        }
+        
+        .data-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .data-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎒 BackpackrGo Admin Dashboard</h1>
+            <p>Monitor user activities and popular destinations</p>
+            <div style="margin-top: 10px;">
+                <button class="btn" onclick="loadAllData()">Refresh Data</button>
+                <button class="btn" onclick="exportData()">Export Data</button>
+            </div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <!-- Analytics Overview -->
+            <div class="dashboard-card">
+                <h3>📊 Analytics Overview</h3>
+                <div id="analytics-overview" class="loading">Loading analytics...</div>
+            </div>
+            
+            <!-- Popular Destinations -->
+            <div class="dashboard-card">
+                <h3>🔥 Popular Destinations</h3>
+                <div id="popular-destinations" class="loading">Loading popular destinations...</div>
+            </div>
+            
+            <!-- Recent Searches -->
+            <div class="dashboard-card">
+                <h3>🔍 Recent Searches</h3>
+                <div id="recent-searches" class="loading">Loading search data...</div>
+            </div>
+            
+            <!-- User Favorites -->
+            <div class="dashboard-card">
+                <h3>❤️ User Favorites</h3>
+                <div id="user-favorites" class="loading">Loading favorites...</div>
+            </div>
+            
+            <!-- Trip Plans -->
+            <div class="dashboard-card">
+                <h3>🗺️ Trip Plans</h3>
+                <div id="trip-plans" class="loading">Loading trip plans...</div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="dashboard-card">
+                <h3>🎯 Recent Activity</h3>
+                <div id="recent-activity" class="loading">Loading recent activity...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+        // Firebase configuration (same as main site)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBpxHCMu-vS5DrDD0Ka7R4fytB-cxggnqo",
+            authDomain: "backpackrgo.firebaseapp.com",
+            projectId: "backpackrgo",
+            storageBucket: "backpackrgo.firebasestorage.app",
+            messagingSenderId: "306558293261",
+            appId: "1:306558293261:web:1fc8f77e48c11ef0d7cc44",
+            measurementId: "G-Z4LJBWYNNP"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Admin functions
+        window.adminFunctions = {
+            async getAnalyticsOverview() {
+                try {
+                    const [searches, interactions, favorites, plans] = await Promise.all([
+                        getDocs(collection(db, 'searchAnalytics')),
+                        getDocs(collection(db, 'destinationAnalytics')),
+                        getDocs(collection(db, 'userFavorites')),
+                        getDocs(collection(db, 'tripPlans'))
+                    ]);
+
+                    return {
+                        totalSearches: searches.size,
+                        totalInteractions: interactions.size,
+                        totalFavorites: favorites.size,
+                        totalTripPlans: plans.size
+                    };
+                } catch (error) {
+                    console.error('Error getting analytics overview:', error);
+                    throw error;
+                }
+            },
+
+            async getPopularDestinations() {
+                try {
+                    const querySnapshot = await getDocs(collection(db, 'destinationAnalytics'));
+                    const interactions = {};
+                    
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        if (interactions[data.destination]) {
+                            interactions[data.destination]++;
+                        } else {
+                            interactions[data.destination] = 1;
+                        }
+                    });
+                    
+                    return Object.entries(interactions)
+                        .sort(([,a], [,b]) => b - a)
+                        .slice(0, 10)
+                        .map(([destination, count]) => ({ destination, count }));
+                } catch (error) {
+                    console.error('Error getting popular destinations:', error);
+                    throw error;
+                }
+            },
+
+            async getRecentSearches() {
+                try {
+                    const q = query(collection(db, 'searchAnalytics'), orderBy('timestamp', 'desc'), limit(20));
+                    const querySnapshot = await getDocs(q);
+                    const searches = [];
+                    
+                    querySnapshot.forEach((doc) => {
+                        searches.push(doc.data());
+                    });
+                    
+                    return searches;
+                } catch (error) {
+                    console.error('Error getting recent searches:', error);
+                    throw error;
+                }
+            },
+
+            async getUserFavorites() {
+                try {
+                    const querySnapshot = await getDocs(collection(db, 'userFavorites'));
+                    const favorites = [];
+                    
+                    querySnapshot.forEach((doc) => {
+                        favorites.push(doc.data());
+                    });
+                    
+                    return favorites;
+                } catch (error) {
+                    console.error('Error getting user favorites:', error);
+                    throw error;
+                }
+            },
+
+            async getTripPlans() {
+                try {
+                    const q = query(collection(db, 'tripPlans'), orderBy('createdAt', 'desc'), limit(10));
+                    const querySnapshot = await getDocs(q);
+                    const plans = [];
+                    
+                    querySnapshot.forEach((doc) => {
+                        plans.push(doc.data());
+                    });
+                    
+                    return plans;
+                } catch (error) {
+                    console.error('Error getting trip plans:', error);
+                    throw error;
+                }
+            },
+
+            async getRecentActivity() {
+                try {
+                    const q = query(collection(db, 'destinationAnalytics'), orderBy('timestamp', 'desc'), limit(15));
+                    const querySnapshot = await getDocs(q);
+                    const activities = [];
+                    
+                    querySnapshot.forEach((doc) => {
+                        activities.push(doc.data());
+                    });
+                    
+                    return activities;
+                } catch (error) {
+                    console.error('Error getting recent activity:', error);
+                    throw error;
+                }
+            }
+        };
+
+        // Display functions
+        window.displayAnalyticsOverview = async function() {
+            try {
+                const data = await window.adminFunctions.getAnalyticsOverview();
+                document.getElementById('analytics-overview').innerHTML = `
+                    <div class="stat-item">
+                        <span>Total Searches</span>
+                        <strong>${data.totalSearches}</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Total Interactions</span>
+                        <strong>${data.totalInteractions}</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Total Favorites</span>
+                        <strong>${data.totalFavorites}</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Total Trip Plans</span>
+                        <strong>${data.totalTripPlans}</strong>
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('analytics-overview').innerHTML = '<div class="error">Failed to load analytics</div>';
+            }
+        };
+
+        window.displayPopularDestinations = async function() {
+            try {
+                const data = await window.adminFunctions.getPopularDestinations();
+                const html = data.map(item => `
+                    <div class="stat-item">
+                        <span>${item.destination}</span>
+                        <strong>${item.count} interactions</strong>
+                    </div>
+                `).join('');
+                document.getElementById('popular-destinations').innerHTML = html || '<div class="loading">No data available</div>';
+            } catch (error) {
+                document.getElementById('popular-destinations').innerHTML = '<div class="error">Failed to load popular destinations</div>';
+            }
+        };
+
+        window.displayRecentSearches = async function() {
+            try {
+                const data = await window.adminFunctions.getRecentSearches();
+                const html = data.map(item => `
+                    <div class="data-item">
+                        <strong>"${item.searchTerm}"</strong> - ${item.resultsCount} results
+                        <br><small>${new Date(item.timestamp.seconds * 1000).toLocaleString()}</small>
+                    </div>
+                `).join('');
+                document.getElementById('recent-searches').innerHTML = `<div class="data-list">${html}</div>` || '<div class="loading">No searches yet</div>';
+            } catch (error) {
+                document.getElementById('recent-searches').innerHTML = '<div class="error">Failed to load search data</div>';
+            }
+        };
+
+        window.displayUserFavorites = async function() {
+            try {
+                const data = await window.adminFunctions.getUserFavorites();
+                const favCounts = {};
+                data.forEach(item => {
+                    favCounts[item.destination] = (favCounts[item.destination] || 0) + 1;
+                });
+                
+                const html = Object.entries(favCounts)
+                    .sort(([,a], [,b]) => b - a)
+                    .map(([destination, count]) => `
+                        <div class="stat-item">
+                            <span>${destination}</span>
+                            <strong>${count} favorites</strong>
+                        </div>
+                    `).join('');
+                document.getElementById('user-favorites').innerHTML = html || '<div class="loading">No favorites yet</div>';
+            } catch (error) {
+                document.getElementById('user-favorites').innerHTML = '<div class="error">Failed to load favorites</div>';
+            }
+        };
+
+        window.displayTripPlans = async function() {
+            try {
+                const data = await window.adminFunctions.getTripPlans();
+                const html = data.map(item => `
+                    <div class="data-item">
+                        <strong>${item.destinations ? item.destinations.length : 0} destinations</strong>
+                        <br><small>Created: ${item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'Unknown'}</small>
+                        ${item.destinations ? `<br><small>Includes: ${item.destinations.slice(0, 2).join(', ')}${item.destinations.length > 2 ? '...' : ''}</small>` : ''}
+                    </div>
+                `).join('');
+                document.getElementById('trip-plans').innerHTML = `<div class="data-list">${html}</div>` || '<div class="loading">No trip plans yet</div>';
+            } catch (error) {
+                document.getElementById('trip-plans').innerHTML = '<div class="error">Failed to load trip plans</div>';
+            }
+        };
+
+        window.displayRecentActivity = async function() {
+            try {
+                const data = await window.adminFunctions.getRecentActivity();
+                const html = data.map(item => `
+                    <div class="data-item">
+                        <strong>${item.action}</strong> on ${item.destination}
+                        <br><small>${new Date(item.timestamp.seconds * 1000).toLocaleString()}</small>
+                    </div>
+                `).join('');
+                document.getElementById('recent-activity').innerHTML = `<div class="data-list">${html}</div>` || '<div class="loading">No activity yet</div>';
+            } catch (error) {
+                document.getElementById('recent-activity').innerHTML = '<div class="error">Failed to load activity</div>';
+            }
+        };
+
+        // Load all data function
+        window.loadAllData = async function() {
+            await Promise.all([
+                displayAnalyticsOverview(),
+                displayPopularDestinations(),
+                displayRecentSearches(),
+                displayUserFavorites(),
+                displayTripPlans(),
+                displayRecentActivity()
+            ]);
+        };
+
+        // Export data function
+        window.exportData = async function() {
+            try {
+                const [analytics, popular, searches, favorites, plans, activity] = await Promise.all([
+                    window.adminFunctions.getAnalyticsOverview(),
+                    window.adminFunctions.getPopularDestinations(),
+                    window.adminFunctions.getRecentSearches(),
+                    window.adminFunctions.getUserFavorites(),
+                    window.adminFunctions.getTripPlans(),
+                    window.adminFunctions.getRecentActivity()
+                ]);
+
+                const exportData = {
+                    analytics,
+                    popular,
+                    searches,
+                    favorites,
+                    plans,
+                    activity,
+                    exportedAt: new Date().toISOString()
+                };
+
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+                
+                const exportFileDefaultName = `backpackrgo-data-${new Date().toISOString().split('T')[0]}.json`;
+                
+                const linkElement = document.createElement('a');
+                linkElement.setAttribute('href', dataUri);
+                linkElement.setAttribute('download', exportFileDefaultName);
+                linkElement.click();
+            } catch (error) {
+                alert('Failed to export data: ' + error.message);
+            }
+        };
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAllData();
+        });
+    </script>
+</body>
+</html>

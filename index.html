@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BackpackrGo - Your ultimate travel guide to Bangladesh. Discover top destinations, plan your trips, and explore the beauty of Bangladesh.">
+  <meta name="keywords" content="Bangladesh travel, backpacking, Cox's Bazar, Sundarbans, Sylhet, travel guide, trip planner">
+  <meta name="author" content="BackpackrGo">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="BackpackrGo - Explore Bangladesh Like Never Before">
+  <meta property="og:description" content="Your complete guide to Bangladesh travel destinations, food, culture, and trip planning.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://backpackrgo.com">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&w=1200">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BackpackrGo - Explore Bangladesh">
+  <meta name="twitter:description" content="Your ultimate Bangladesh travel guide and trip planner.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&w=1200">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <title>BackpackrGo - Explore Bangladesh Like Never Before</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Loading Spinner -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="spinner">
+      <div class="spinner-ring"></div>
+      <div class="spinner-text">🎒 BackpackrGo</div>
+    </div>
+  </div>
+
+  <!-- Skip to content link for accessibility -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- Header with enhanced navigation -->
+  <header role="banner">
+    <div class="header-container">
+      <div class="logo-section">
+        <h1>🎒 BackpackrGo</h1>
+        <span class="tagline">Discover Bangladesh</span>
+      </div>
+      
+      <!-- Mobile menu toggle -->
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
+      <nav role="navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#destinations" data-section="destinations">Destinations</a></li>
+          <li><a href="#how-to-go" data-section="how-to-go">How to Go</a></li>
+          <li><a href="#food" data-section="food">What to Eat</a></li>
+          <li><a href="#gallery" data-section="gallery">Gallery</a></li>
+          <li><a href="planner.html" class="nav-cta">Trip Planner</a></li>
+        </ul>
+      </nav>
+      
+      <div class="header-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Switch theme">
+          <span class="sun-icon" aria-hidden="true">☀️</span>
+          <span class="moon-icon" aria-hidden="true">🌙</span>
+        </button>
+        <button class="search-toggle" aria-label="Toggle search" title="Search destinations">
+          <span aria-hidden="true">🔍</span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Search overlay -->
+    <div class="search-overlay" id="search-overlay">
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search destinations, food, or activities..." aria-label="Search">
+        <button class="search-close" aria-label="Close search">×</button>
+      </div>
+      <div class="search-results" id="search-results"></div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" role="banner">
+    <div class="hero-background" aria-hidden="true">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h2 class="hero-title">
+        <span class="hero-title-main">Explore Bangladesh</span>
+        <span class="hero-title-sub">Like Never Before</span>
+      </h2>
+      <p class="hero-description">Your complete guide to where to go, how to get there, what to eat, and more.</p>
+      <div class="hero-buttons">
+        <a href="planner.html" class="btn-primary" role="button">
+          <span class="btn-icon">🗺️</span>
+          Start Planning
+        </a>
+        <button class="btn-secondary" id="watch-guide-btn">
+          <span class="btn-icon">📖</span>
+          Explore Guide
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">20+</span>
+          <span class="stat-label">Destinations</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100+</span>
+          <span class="stat-label">Activities</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Local Foods</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-arrow"></div>
+      <span class="scroll-text">Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- Main content wrapper -->
+  <main id="main-content" role="main">
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Top Destinations</h2>
+        <p class="section-subtitle">Discover Bangladesh's most breathtaking locations</p>
+      </div>
+      
+      <!-- Filter buttons -->
+      <div class="filter-buttons" role="tablist" aria-label="Destination filters">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Destinations</button>
+        <button class="filter-btn" data-filter="nature" role="tab" aria-selected="false">Nature</button>
+        <button class="filter-btn" data-filter="beach" role="tab" aria-selected="false">Beaches</button>
+        <button class="filter-btn" data-filter="heritage" role="tab" aria-selected="false">Heritage</button>
+        <button class="filter-btn" data-filter="adventure" role="tab" aria-selected="false">Adventure</button>
+      </div>
+      
+      <div class="cards" role="tabpanel">
+        <article class="card" data-category="nature adventure" data-aos="fade-up">
+          <div class="card-image-container">
+            <img src="images/sundarbans.jpg" alt="Sundarbans mangrove forest with Royal Bengal Tiger habitat" 
+                 onerror="this.src='https://images.unsplash.com/photo-1560207844-ca7c5bf4c882?ixlib=rb-4.0.3&w=400'"
+                 loading="lazy">
+            <div class="card-overlay">
+              <button class="favorite-btn" aria-label="Add to favorites" title="Add to favorites">
+                <span class="heart-icon">♡</span>
+              </button>
+              <span class="category-tag nature">Nature</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>🐅 Sundarbans</h3>
+            <p>Home of the Royal Bengal Tiger and largest mangrove forest in the world. Experience boat safaris through pristine waterways.</p>
+            <div class="card-details">
+              <span class="duration" title="Recommended duration">🕐 3-4 days</span>
+              <span class="budget" title="Estimated budget">💰 ৳5,000-8,000</span>
+              <span class="difficulty easy" title="Difficulty level">Medium</span>
+            </div>
+            <div class="card-actions">
+              <button class="learn-more-btn" data-destination="Sundarbans">Learn More</button>
+              <button class="add-to-plan-btn" data-destination="Sundarbans">Add to Plan</button>
+            </div>
+          </div>
+        </article>
+        
+        <article class="card" data-category="beach adventure" data-aos="fade-up">
+          <div class="card-image-container">
+            <img src="images/coxsbazar.jpg" alt="Cox's Bazar beach with sunset and waves"
+                 onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&w=400'"
+                 loading="lazy">
+            <div class="card-overlay">
+              <button class="favorite-btn" aria-label="Add to favorites" title="Add to favorites">
+                <span class="heart-icon">♡</span>
+              </button>
+              <span class="category-tag beach">Beach</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>🏖️ Cox's Bazar</h3>
+            <p>World's longest natural sea beach with stunning sunsets, fresh seafood, and water sports activities.</p>
+            <div class="card-details">
+              <span class="duration" title="Recommended duration">🕐 2-3 days</span>
+              <span class="budget" title="Estimated budget">💰 ৳4,000-7,000</span>
+              <span class="difficulty easy" title="Difficulty level">Easy</span>
+            </div>
+            <div class="card-actions">
+              <button class="learn-more-btn" data-destination="Cox's Bazar">Learn More</button>
+              <button class="add-to-plan-btn" data-destination="Cox's Bazar">Add to Plan</button>
+            </div>
+          </div>
+        </article>
+        
+        <article class="card" data-category="nature heritage" data-aos="fade-up">
+          <div class="card-image-container">
+            <img src="images/sylhet.jpg" alt="Sylhet tea gardens with rolling green hills"
+                 onerror="this.src='https://images.unsplash.com/photo-1545558014-8692077e9b5c?ixlib=rb-4.0.3&w=400'"
+                 loading="lazy">
+            <div class="card-overlay">
+              <button class="favorite-btn" aria-label="Add to favorites" title="Add to favorites">
+                <span class="heart-icon">♡</span>
+              </button>
+              <span class="category-tag nature">Nature</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>🍃 Sylhet</h3>
+            <p>Rolling tea gardens, crystal clear rivers, and beautiful hill stations. Perfect for nature lovers.</p>
+            <div class="card-details">
+              <span class="duration" title="Recommended duration">🕐 4-5 days</span>
+              <span class="budget" title="Estimated budget">💰 ৳3,500-6,000</span>
+              <span class="difficulty easy" title="Difficulty level">Easy</span>
+            </div>
+            <div class="card-actions">
+              <button class="learn-more-btn" data-destination="Sylhet">Learn More</button>
+              <button class="add-to-plan-btn" data-destination="Sylhet">Add to Plan</button>
+            </div>
+          </div>
+        </article>
+        
+        <article class="card" data-category="adventure heritage" data-aos="fade-up">
+          <div class="card-image-container">
+            <img src="images/chittagong.jpg" alt="Chittagong Hill Tracts with tribal bridges"
+                 onerror="this.src='https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&w=400'"
+                 loading="lazy">
+            <div class="card-overlay">
+              <button class="favorite-btn" aria-label="Add to favorites" title="Add to favorites">
+                <span class="heart-icon">♡</span>
+              </button>
+              <span class="category-tag adventure">Adventure</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>🏔️ Chittagong Hill Tracts</h3>
+            <p>Tribal culture, hanging bridges, and breathtaking hill views. Adventure awaits in Bandarban and Rangamati.</p>
+            <div class="card-details">
+              <span class="duration" title="Recommended duration">🕐 5-7 days</span>
+              <span class="budget" title="Estimated budget">💰 ৳4,500-8,000</span>
+              <span class="difficulty medium" title="Difficulty level">Medium</span>
+            </div>
+            <div class="card-actions">
+              <button class="learn-more-btn" data-destination="Chittagong Hill Tracts">Learn More</button>
+              <button class="add-to-plan-btn" data-destination="Chittagong Hill Tracts">Add to Plan</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- How to Go Section -->
+    <section id="how-to-go" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">🚗 How to Go</h2>
+        <p class="section-subtitle">Choose the best transportation for your journey</p>
+      </div>
+      <div class="transport-grid">
+        <div class="transport-card">
+          <h3>✈️ By Air</h3>
+          <p>Fastest option for distant destinations like Cox's Bazar and Sylhet. Book in advance for better prices.</p>
+        </div>
+        <div class="transport-card">
+          <h3>🚂 By Train</h3>
+        <p>Comfortable and scenic routes to major cities. Book AC seats for long journeys.</p>
+      </div>
+      <div class="transport-card">
+        <h3>🚌 By Bus</h3>
+        <p>Most economical option with frequent services. Choose AC buses for comfort.</p>
+      </div>
+      <div class="transport-card">
+        <h3>🚢 By Launch/Boat</h3>
+        <p>Essential for river destinations like Sundarbans. Book cabins for overnight journeys.</p>
+      </div>
+    </div>
+    </section>
+
+    <!-- Food Section -->
+    <section id="food" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">🍽️ What to Eat</h2>
+        <p class="section-subtitle">Discover Bangladesh's incredible culinary heritage</p>
+      </div>
+      <div class="food-regions">
+      <div class="food-region">
+        <h3>🏙️ Old Dhaka</h3>
+        <div class="food-items">
+          <span class="food-item">Puran Dhaka Biriyani</span>
+          <span class="food-item">Kacchi Biriyani</span>
+          <span class="food-item">Bakarkhani</span>
+          <span class="food-item">Traditional Fuchka</span>
+        </div>
+      </div>
+      
+      <div class="food-region">
+        <h3>🏖️ Coastal Areas</h3>
+        <div class="food-items">
+          <span class="food-item">Fresh Seafood Curry</span>
+          <span class="food-item">Shutki Bhorta</span>
+          <span class="food-item">Mezbani Beef</span>
+          <span class="food-item">Coconut Fish</span>
+        </div>
+      </div>
+      
+      <div class="food-region">
+        <h3>🍃 Hill Regions</h3>
+        <div class="food-items">
+          <span class="food-item">Seven-layer Tea</span>
+          <span class="food-item">Sylheti Pitha</span>
+          <span class="food-item">Tribal Bamboo Chicken</span>
+          <span class="food-item">Hill Tracts Rice</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="section-container">
+    <div class="section-header">
+      <h2 class="section-title">📸 Discover Bangladesh</h2>
+      <p class="section-subtitle">A visual journey through Bangladesh's most beautiful destinations</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" data-location="Sundarbans">
+        <img src="https://images.unsplash.com/photo-1560207844-ca7c5bf4c882?ixlib=rb-4.0.3&w=400" alt="Sundarbans Mangrove">
+        <div class="gallery-overlay">
+          <h4>🐅 Sundarbans</h4>
+          <p>Royal Bengal Tiger's home</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-location="Cox's Bazar">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&w=400" alt="Cox's Bazar Beach">
+        <div class="gallery-overlay">
+          <h4>🏖️ Cox's Bazar</h4>
+          <p>World's longest beach</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-location="Tea Gardens">
+        <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?ixlib=rb-4.0.3&w=400" alt="Tea Gardens">
+        <div class="gallery-overlay">
+          <h4>🍃 Tea Gardens</h4>
+          <p>Rolling green hills</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-location="Hill Tracts">
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&w=400" alt="Hill Tracts">
+        <div class="gallery-overlay">
+          <h4>🏔️ Hill Tracts</h4>
+          <p>Tribal culture & nature</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-location="Rural Bangladesh">
+        <img src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?ixlib=rb-4.0.3&w=400" alt="Rural Bangladesh">
+        <div class="gallery-overlay">
+          <h4>🌾 Rural Life</h4>
+          <p>Traditional villages</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-location="Dhaka">
+        <img src="https://images.unsplash.com/photo-1582963842415-a50b95cb8a93?ixlib=rb-4.0.3&w=400" alt="Dhaka">
+        <div class="gallery-overlay">
+          <h4>🏛️ Historic Dhaka</h4>
+          <p>Cultural heritage</p>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section id="tips" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">💡 Essential Travel Tips</h2>
+        <p class="section-subtitle">Important guidelines for a safe and enjoyable trip</p>
+      </div>
+      <div class="tips-grid">
+      <div class="tip-category">
+        <h3>🌱 Environmental</h3>
+        <ul>
+          <li>Don't litter in nature spots</li>
+          <li>Use biodegradable products</li>
+          <li>Respect wildlife and their habitats</li>
+          <li>Support eco-friendly accommodations</li>
+        </ul>
+      </div>
+      
+      <div class="tip-category">
+        <h3>🤝 Cultural</h3>
+        <ul>
+          <li>Dress modestly, especially in rural areas</li>
+          <li>Remove shoes when entering homes/mosques</li>
+          <li>Learn basic Bengali greetings</li>
+          <li>Respect local customs and traditions</li>
+        </ul>
+      </div>
+      
+      <div class="tip-category">
+        <h3>🛡️ Safety</h3>
+        <ul>
+          <li>Beware of fake tour guides and scams</li>
+          <li>Keep copies of important documents</li>
+          <li>Use registered transportation</li>
+          <li>Stay hydrated and carry medicines</li>
+        </ul>
+      </div>
+      
+      <div class="tip-category">
+        <h3>💰 Budget</h3>
+        <ul>
+          <li>Bargain politely in local markets</li>
+          <li>Try street food for authentic taste</li>
+          <li>Book accommodations in advance</li>
+          <li>Carry both cash and cards</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo" class="section-container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>🎒 BackpackrGo</h3>
+        <p>Your ultimate Bangladesh travel companion</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#food">Food Guide</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <p>📧 info@backpackrgo.com</p>
+        <p>🌐 www.backpackrgo.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 BackpackrGo. All rights reserved. | Made with ❤️ for Bangladesh travelers</p>
+    </div>
+  </footer>
+   <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+  import { getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBpxHCMu-vS5DrDD0Ka7R4fytB-cxggnqo",
+    authDomain: "backpackrgo.firebaseapp.com",
+    projectId: "backpackrgo",
+    storageBucket: "backpackrgo.firebasestorage.app",
+    messagingSenderId: "306558293261",
+    appId: "1:306558293261:web:1fc8f77e48c11ef0d7cc44",
+    measurementId: "G-Z4LJBWYNNP"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  // Make Firebase services globally available
+  window.firebaseServices = {
+    db,
+    auth,
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    setDoc,
+    getDoc,
+    updateDoc,
+    deleteDoc,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+  };
+
+  // Firebase Database Functions
+  window.firebaseDB = {
+    // Save user's favorite destination
+    async saveFavorite(destinationName, userId = 'guest') {
+      try {
+        const favoriteData = {
+          destination: destinationName,
+          userId: userId,
+          timestamp: new Date(),
+          type: 'favorite'
+        };
+        
+        const docRef = await addDoc(collection(db, 'userFavorites'), favoriteData);
+        console.log('Favorite saved with ID: ', docRef.id);
+        return docRef.id;
+      } catch (error) {
+        console.error('Error saving favorite: ', error);
+        throw error;
+      }
+    },
+
+    // Save trip plan
+    async saveTripPlan(tripData, userId = 'guest') {
+      try {
+        const planData = {
+          ...tripData,
+          userId: userId,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          type: 'tripPlan'
+        };
+        
+        const docRef = await addDoc(collection(db, 'tripPlans'), planData);
+        console.log('Trip plan saved with ID: ', docRef.id);
+        return docRef.id;
+      } catch (error) {
+        console.error('Error saving trip plan: ', error);
+        throw error;
+      }
+    },
+
+    // Get user's favorites
+    async getFavorites(userId = 'guest') {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'userFavorites'));
+        const favorites = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.userId === userId) {
+            favorites.push({ id: doc.id, ...data });
+          }
+        });
+        return favorites;
+      } catch (error) {
+        console.error('Error getting favorites: ', error);
+        throw error;
+      }
+    },
+
+    // Get user's trip plans
+    async getTripPlans(userId = 'guest') {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'tripPlans'));
+        const plans = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.userId === userId) {
+            plans.push({ id: doc.id, ...data });
+          }
+        });
+        return plans;
+      } catch (error) {
+        console.error('Error getting trip plans: ', error);
+        throw error;
+      }
+    },
+
+    // Save search analytics
+    async saveSearchAnalytics(searchTerm, results) {
+      try {
+        const searchData = {
+          searchTerm: searchTerm,
+          resultsCount: results.length,
+          timestamp: new Date(),
+          type: 'search'
+        };
+        
+        await addDoc(collection(db, 'searchAnalytics'), searchData);
+      } catch (error) {
+        console.error('Error saving search analytics: ', error);
+      }
+    },
+
+    // Save destination interaction
+    async saveDestinationInteraction(destinationName, actionType) {
+      try {
+        const interactionData = {
+          destination: destinationName,
+          action: actionType, // 'view', 'learn_more', 'add_to_plan'
+          timestamp: new Date(),
+          type: 'interaction'
+        };
+        
+        await addDoc(collection(db, 'destinationAnalytics'), interactionData);
+      } catch (error) {
+        console.error('Error saving interaction: ', error);
+      }
+    },
+
+    // Get popular destinations (analytics)
+    async getPopularDestinations() {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'destinationAnalytics'));
+        const interactions = {};
+        
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (interactions[data.destination]) {
+            interactions[data.destination]++;
+          } else {
+            interactions[data.destination] = 1;
+          }
+        });
+        
+        // Sort by popularity
+        return Object.entries(interactions)
+          .sort(([,a], [,b]) => b - a)
+          .slice(0, 10)
+          .map(([destination, count]) => ({ destination, count }));
+      } catch (error) {
+        console.error('Error getting popular destinations: ', error);
+        return [];
+      }
+    }
+  };
+
+  console.log('Firebase initialized successfully!');
+</script>
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BackpackrGo - Travel Companion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background-color: #f8fafc;
+            color: #333;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .home-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .feature-description {
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #718096;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                gap: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="#" class="logo">🎒 BackpackrGo</a>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('explore')">🗺️ Explore</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('food')">🍜 Food</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('alerts')">⚠️ Alerts</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('language')">🗣️ Language</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="home-hero">
+                <h1 class="hero-title">Welcome to BackpackrGo! 🎒</h1>
+                <p class="hero-subtitle">Your ultimate travel companion for exploring Bangladesh and beyond</p>
+            </section>
+
+            <div class="feature-grid">
+                <div class="feature-card" onclick="showPage('explore')">
+                    <div class="feature-icon">🗺️</div>
+                    <h3 class="feature-title">Explore</h3>
+                    <p class="feature-description">Discover amazing destinations with interactive maps and local insights</p>
+                </div>
+
+                <div class="feature-card" onclick="showPage('food')">
+                    <div class="feature-icon">🍜</div>
+                    <h3 class="feature-title">Local Food</h3>
+                    <p class="feature-description">Find the best local restaurants, street food, and traditional dishes</p>
+                </div>
+
+                <div class="feature-card" onclick="showPage('alerts')">
+                    <div class="feature-icon">⚠️</div>
+                    <h3 class="feature-title">Safety & Alerts</h3>
+                    <p class="feature-description">Stay informed with weather updates, safety tips, and travel alerts</p>
+                </div>
+
+                <div class="feature-card" onclick="showPage('language')">
+                    <div class="feature-icon">🗣️</div>
+                    <h3 class="feature-title">Language Helper</h3>
+                    <p class="feature-description">Essential phrases in Bangla and English for easy communication</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explore Page -->
+        <div id="explore" class="page">
+            <div class="page-header">
+                <h1 class="page-title">🗺️ Explore Bangladesh</h1>
+                <p class="page-subtitle">Discover amazing destinations across the country</p>
+            </div>
+
+            <div class="card">
+                <h2>Interactive Map</h2>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14598273.374444181!2d82.79476939999999!3d23.684994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30adaaed80e18ba7%3A0xf2d28e0c4e1fc6b!2sBangladesh!5e0!3m2!1sen!2sbd!4v1642678901234!5m2!1sen!2sbd"
+                        width="100%"
+                        height="400"
+                        style="border: 0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                </div>
+                <p>Click and explore different regions of Bangladesh. Zoom in to discover local attractions, restaurants, and accommodations.</p>
+            </div>
+        </div>
+
+        <!-- Food Page -->
+        <div id="food" class="page">
+            <div class="page-header">
+                <h1 class="page-title">🍜 Local Food Guide</h1>
+                <p class="page-subtitle">Discover authentic Bangladeshi cuisine and where to find it</p>
+            </div>
+
+            <div class="card">
+                <h2>Must-Try Local Foods</h2>
+                <p><strong>🍛 Biryani (বিরিয়ানি)</strong> - Aromatic rice dish with meat or vegetables, spiced to perfection. Price: 80-200 BDT</p>
+                <p><strong>🐟 Hilsa Fish Curry (ইলিশ মাছের ঝোল)</strong> - National fish of Bangladesh in traditional spicy curry. Price: 150-300 BDT</p>
+                <p><strong>🥮 Pitha (পিঠা)</strong> - Traditional rice cakes with various sweet and savory fillings. Price: 20-50 BDT</p>
+                <p><strong>🥙 Fuchka (ফুচকা)</strong> - Popular street snack - crispy shells filled with spiced water. Price: 5-10 BDT per piece</p>
+            </div>
+        </div>
+
+        <!-- Alerts Page -->
+        <div id="alerts" class="page">
+            <div class="page-header">
+                <h1 class="page-title">⚠️ Safety & Alerts</h1>
+                <p class="page-subtitle">Stay informed and safe during your travels in Bangladesh</p>
+            </div>
+
+            <div class="card">
+                <h2>Emergency Contacts</h2>
+                <p><strong>Police:</strong> 999</p>
+                <p><strong>Fire Service:</strong> 999</p>
+                <p><strong>Ambulance:</strong> 999</p>
+                <p><strong>Tourist Police:</strong> +880-2-9330000</p>
+            </div>
+        </div>
+
+        <!-- Language Page -->
+        <div id="language" class="page">
+            <div class="page-header">
+                <h1 class="page-title">🗣️ Language Helper</h1>
+                <p class="page-subtitle">Essential Bangla phrases for travelers with pronunciation guide</p>
+            </div>
+
+            <div class="card">
+                <h2>Basic Phrases</h2>
+                <p><strong>Hello:</strong> আসসালামু আলাইকুম (Assalamu alaikum)</p>
+                <p><strong>Thank you:</strong> ধন্যবাদ (Dhonnobad)</p>
+                <p><strong>How much?:</strong> কত টাকা? (Koto taka?)</p>
+                <p><strong>Where is...?:</strong> ...কোথায়? (...kothay?)</p>
+                <p><strong>I want to eat:</strong> আমি খেতে চাই (Ami khete chai)</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
